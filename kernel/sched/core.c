@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
- *  kernel/sched/core.c
+ *  kernel/sched/core.csched/core.c
  *
  *  Core kernel scheduler code and related syscalls
  *
@@ -1013,7 +1013,7 @@ void wake_up_q(struct wake_q_head *head)
  * resched_curr - mark rq's current task 'to be rescheduled now'.
  *
  * On UP this means the setting of the need_resched flag, on SMP it
- * might also involve a cross-CPU call to trigger the scheduler on
+ * might also involve a cross-CPU call to trigger the scheduler onsched/core.c
  * the target CPU.
  */
 void resched_curr(struct rq *rq)
