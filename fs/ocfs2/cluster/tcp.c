@@ -46,6 +46,7 @@
 #include <linux/net.h>
 #include <linux/export.h>
 #include <net/tcp.h>
+#include <trace/events/sock.h>
 
 #include <linux/uaccess.h>
 
@@ -584,6 +585,8 @@ static void o2net_data_ready(struct sock *sk)
 {
 	void (*ready)(struct sock *sk);
 	struct o2net_sock_container *sc;
+
+	trace_sk_data_ready(sk);
 
 	read_lock_bh(&sk->sk_callback_lock);
 	sc = sk->sk_user_data;
@@ -1602,6 +1605,7 @@ static void o2net_start_connect(struct work_struct *work)
 	sc->sc_sock = sock; /* freed by sc_kref_release */
 
 	sock->sk->sk_allocation = GFP_ATOMIC;
+	sock->sk->sk_use_task_frag = false;
 
 	myaddr.sin_family = AF_INET;
 	myaddr.sin_addr.s_addr = mynode->nd_ipv4_address;
@@ -1929,6 +1933,8 @@ static void o2net_accept_many(struct work_struct *work)
 static void o2net_listen_data_ready(struct sock *sk)
 {
 	void (*ready)(struct sock *sk);
+
+	trace_sk_data_ready(sk);
 
 	read_lock_bh(&sk->sk_callback_lock);
 	ready = sk->sk_user_data;

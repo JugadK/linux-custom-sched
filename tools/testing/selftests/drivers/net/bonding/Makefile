@@ -7,7 +7,9 @@ TEST_PROGS := \
 	bond-lladdr-target.sh \
 	dev_addr_lists.sh \
 	mode-1-recovery-updelay.sh \
-	mode-2-recovery-updelay.sh
+	mode-2-recovery-updelay.sh \
+	option_prio.sh \
+	bond-eth-type-change.sh
 
 TEST_FILES := \
 	lag_lib.sh \
